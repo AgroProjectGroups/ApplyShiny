@@ -1,22 +1,31 @@
-
+#Chargement des packages
 options(encoding = "UTF-8")
 library(shiny)
 library(ggplot2)
 library(plotly)
+library(colourpicker)
+library(dplyr)
+library(tidyverse)
 
-# Define UI for application that draws a histogram
+
 shinyUI(fluidPage(
 
-    # Application title
+    # Titre Global
     titlePanel("Welcome"),
     
     #Choisir la region d'interet
     selectizeInput(
-      inputId="RegionList", 
-      label="Sélectionner une région", 
-      choices=NULL, 
+      inputId = "RegionList", 
+      label = "Sélectionner une région", 
+      choices = NULL, 
       options = list(maxItems = 1)
       ),
+    
+    #Choisir l'indicateur
+    radioButtons(inputId = "yvar", 
+                 label = "Sélectionner un indicateur", 
+                 selected = "WRI",
+                 choices = c("WRI" = "WRI", "Exposure" = "Exposure", "Vulnerability" = "Vulnerability", "Susceptibility" = "Susceptibility", "Lack.of.Coping.Capabilities" = "Lack.of.Coping.Capabilities", "Lack.of.Adaptive.Capacities" = "Lack.of.Adaptive.Capacities")),
     
     #Choisir la taille des points des graphiques
     sliderInput(inputId = "sizepoint", 
@@ -36,10 +45,19 @@ shinyUI(fluidPage(
                 min = 1, max = 18,
                 value = 10, step = 1),
     
+    #Choisir la couleur des points region
+    colourInput(inputId = "color_region", 
+                label = "Couleur pour la région sélectionnée :", 
+                value = "orange"),
+    
+    #Choisir la couleur des points de la moyenne
+    colourInput(inputId = "color_all", 
+                label = "Couleur pour toutes les régions confondues :", 
+                value = "grey"),
     
         # Affichage du graph
         mainPanel(
-            plotlyOutput(outputId ="PlotWRI")
+            plotlyOutput(outputId ="Plot_by_region")
         )
     )
 )
