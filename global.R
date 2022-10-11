@@ -1,0 +1,20 @@
+#Chargement des packages
+options(encoding = "UTF-8")
+library(shiny)
+library(ggplot2)
+library(plotly)
+library(colourpicker)
+library(dplyr)
+library(tidyverse)
+library(highcharter)
+library(shinythemes)
+library(corrplot)
+library("heatmaply")
+library("ggcorrplot")
+
+library(shinydashboard)        
+
+library(shinyLP)
+library(FactoMineR)
+library(gmodels)
+library(psych)
